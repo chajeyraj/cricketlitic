@@ -6,13 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// MySQL DB Connection
-string connectionString = builder.Configuration.GetConnectionString("DefaultConnectionMySQL");
-builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-           .EnableSensitiveDataLogging() // Enable SQL query logging
-           .LogTo(Console.WriteLine));
-
 // Enable CORS for React Frontend
 builder.Services.AddCors(options =>
 {
@@ -24,6 +17,13 @@ builder.Services.AddCors(options =>
               .AllowCredentials();
     });
 });
+
+// MS SQL Server DB Connection
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnectionSQLServer");
+builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString)
+           .EnableSensitiveDataLogging() // Enable SQL query logging
+           .LogTo(Console.WriteLine));
 
 var app = builder.Build();
 

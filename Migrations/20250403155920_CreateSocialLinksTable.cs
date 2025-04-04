@@ -5,7 +5,7 @@
 namespace TutorialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class Addsocial_linksTable : Migration
+    public partial class CreateSocialLinksTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
